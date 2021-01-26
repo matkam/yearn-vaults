@@ -298,8 +298,7 @@ def test_reporting(vault, strategy, gov, rando):
     vault.expectedReturn(strategy)  # Do this for coverage of `Vault._expectedReturn()`
 
 
-@pytest.fixture
-def test_withdrawalQueue(gov, management, vault, strategy, other_strategy):
+def test_withdrawalQueue(chain, gov, management, vault, strategy, other_strategy):
     vault.addStrategy(strategy, 100, 10, 1000, {"from": gov})
     vault.addStrategy(other_strategy, 100, 10, 1000, {"from": gov})
 
@@ -338,9 +337,7 @@ def test_withdrawalQueue(gov, management, vault, strategy, other_strategy):
     assert vault.withdrawalQueue(1) == other_strategy
 
 
-def test_update_debtRatio_to_add_second_strategy(
-    chain, gov, vault, strategy, other_strategy
-):
+def test_update_debtRatio_to_add_second_strategy(gov, vault, strategy, other_strategy):
 
     vault.addStrategy(strategy, 10_000, 0, 0, {"from": gov})
 
